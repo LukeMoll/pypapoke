@@ -8,6 +8,7 @@ setup(
     url="https://github.com/lukemoll/pypapoke",
     packages=["pypapoke"],
     install_requires=["evdev"],
+    python_requires=">3.6", # for fstrings
     entry_points={
         "console_scripts":["pypapoke=pypapoke.main:main"]
     }
