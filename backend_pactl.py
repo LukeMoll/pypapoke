@@ -22,6 +22,8 @@ class PACtlBackend(AbstractBackend):
             proc = pactl("list", "short", "sink-inputs")
             inputs = []
             for line in proc.stdout.strip().split("\n"):
+                if len(line) < 3:
+                    continue
                 parts = line.split()
                 sink_input = SinkInputIndex(parts[0])
                 sink = SinkIndex(parts[1])

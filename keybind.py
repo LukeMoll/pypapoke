@@ -1,5 +1,4 @@
 import evdev # type: ignore
-import asyncio
 
 from typing import List, Dict, Callable
 
@@ -31,20 +30,3 @@ def handler(scancode : int):
         key_bindings[scancode] = fn
 
     return __decorator
-
-if __name__ == "__main__":
-    @handler(evdev.ecodes.KEY_DOT)
-    def dot_handler(kev : evdev.KeyEvent):
-        if kev.keystate == evdev.KeyEvent.key_up:
-            print("Dot!")
-
-    for inputdevice in find_devices_by_vidpid(0x239a, 0x80aa):
-        print(inputdevice.path, inputdevice.name, inputdevice.phys)
-        asyncio.ensure_future(device_reader(inputdevice))
-
-    loop = asyncio.get_event_loop()
-    loop.run_forever()
-
-"""
-    scan for textier vid:pid and create listeners for all devices
-"""
