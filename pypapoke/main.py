@@ -1,5 +1,8 @@
 import asyncio
+import subprocess
+
 from evdev import ecodes, KeyEvent
+
 from .keybind import handler, find_devices_by_vidpid, device_reader
 from .backend_pactl import PACtlBackend
 
@@ -13,6 +16,11 @@ sink_headphones = next(filter(lambda t: "behringer" in t[1].lower(), sinks))
 def dot_handler(kev : KeyEvent):
     if kev.keystate == KeyEvent.key_up:
         print("Dot!")
+
+@handler(ecodes.KEY_A)
+def ascend_handler(kev : KeyEvent):
+    if kev.keystate == KeyEvent.key_up:
+        subprocess.run(["/bin/systemctl", "suspend"], check=True)
 
 @handler(ecodes.KEY_F1)
 def to_headphones(kev : KeyEvent):
