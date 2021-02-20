@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name="pypapoke",
-    version="1.0",
+    version="1.1",
     description="Switch PulseAudio sinks with a USB keyboard",
     author="Luke Moll",
     url="https://github.com/lukemoll/pypapoke",
